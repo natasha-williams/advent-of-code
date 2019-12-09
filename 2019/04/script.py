@@ -22,13 +22,13 @@ def has_repeat(value, limit=None):
     return len(repeated_items) > 0
 
 
-def get_file_text():
+def get_ranges():
     text = open('input.txt').read()
     return [int(item) for item in text.split('-')]
 
 
-data = get_file_text()
-numbers = range(data[0], data[1])
+range_1, range_2 = get_ranges()
+numbers = range(range_1, range_2)
 total_valid = 0
 total_consecutive_valid = 0
 

@@ -5,7 +5,7 @@ MAX_VALUE = 99
 
 
 def process(num_1=12, num_2=2):
-    data = get_file_text()
+    data = get_items()
     data[1] = num_1
     data[2] = num_2
 
@@ -27,7 +27,7 @@ def process(num_1=12, num_2=2):
     return data[0]
 
 
-def get_file_text():
+def get_items():
     text = open('input.txt').read()
     return [int(item) for item in text.split(',')]
 

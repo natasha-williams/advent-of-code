@@ -16,14 +16,15 @@ def get_added_fuel(fuel):
     return total
 
 
-def get_file_text():
-    return [item for item in open('input.txt')]
+def get_lines():
+    text = open('input.txt').read()
+    return [item for item in text.split('\n')]
 
 
 total_fuel = 0
 total_added_fuel = 0
 
-for item in get_file_text():
+for item in get_lines():
     number = int(item)
     fuel = get_fuel(number)
 

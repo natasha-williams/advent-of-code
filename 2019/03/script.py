@@ -49,14 +49,12 @@ def get_min_steps(data):
     return min(sum_data)
 
 
-def get_file_text():
+def get_lines():
     text = open('input.txt').read()
-    return [item.split(',') for item in text.split('\n')]
+    return [get_coordinates(item.split(',')) for item in text.split('\n')]
 
 
-data = get_file_text()
-line_1 = get_coordinates(data[0])
-line_2 = get_coordinates(data[1])
+line_1, line_2 = get_lines()
 duplicates = get_duplicates(line_1, line_2)
 
 print('Part 1: {}'.format(get_closest(duplicates)))
