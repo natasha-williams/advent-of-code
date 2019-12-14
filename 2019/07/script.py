@@ -3,11 +3,7 @@ import path
 
 from itertools import permutations
 
-from intcode import IntcodeGenerator
-
-
-class LoopIntcodeGenerator(IntcodeGenerator):
-    OPTCODE_EXIT_MODES = (4, 99)
+from intcode import IntcodeGenerator, LoopIntcodeGenerator
 
 
 def get_max_signal(phases, feedback_mode=False):

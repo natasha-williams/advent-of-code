@@ -1,5 +1,6 @@
 
 class IntcodeGenerator(object):
+    MEMORY = [0] * 1000
     MAX_DIGITS = 5
     OPTCODE_EXIT_MODES = (99,)
     OPTCODE_MODES = {
@@ -11,13 +12,20 @@ class IntcodeGenerator(object):
         6: ['jump_if_false', 3],
         7: ['is_less_than', 4],
         8: ['is_equal', 4],
+        9: ['set_relative_base', 2],
         99: ['exit', 0],
+    }
+    MODES = {
+        0: 'parameter',
+        1: 'position',
+        2: 'relative',
     }
 
     def __init__(self, data, phase):
         self.index = 0
-        self.data = data
+        self.data = data + self.MEMORY
         self.phase = phase
+        self.relative_base = 0
         self.number = None
         self.output = None
         self.has_complete = False
@@ -37,13 +45,23 @@ class IntcodeGenerator(object):
         optcode = int(instruction[-2:])
         instructions = []
 
-        for i, item in enumerate(instruction[::-1][2:]):
-            idx = self.index + i + 1
-            total = len(self.data)
-            value = idx if int(item) or idx >= total else self.data[idx]
+        for index, item in enumerate(instruction[::-1][2:]):
+            value = getattr(self, self.MODES[int(item)])(index)
             instructions.append(value)
 
         return [optcode] + instructions
+
+    def parameter(self, index):
+        idx = self.index + index + 1
+
+        if idx < len(self.data):
+            return self.data[idx]
+
+    def position(self, index):
+        return self.index + index + 1
+
+    def relative(self, index):
+        return self.relative_base + self.parameter(index)
 
     def add(self, *args):
         self.data[args[2]] = self.data[args[0]] + self.data[args[1]]
@@ -86,10 +104,14 @@ class IntcodeGenerator(object):
         self.data[args[2]] = int(self.data[args[0]] == self.data[args[1]])
         self.index += args[3]
 
+    def set_relative_base(self, *args):
+        self.relative_base += self.data[args[0]]
+        self.index += args[3]
+
     def exit(self, *args):
         self.has_complete = True
 
-    def run(self, number):
+    def run(self, number=None):
         self.number = number
 
         while True:
@@ -101,3 +123,7 @@ class IntcodeGenerator(object):
                 break
 
         return self.output
+
+
+class LoopIntcodeGenerator(IntcodeGenerator):
+    OPTCODE_EXIT_MODES = (4, 99)
