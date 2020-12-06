@@ -2,16 +2,6 @@
 import common
 
 
-class Person(object):
-    def __init__(self, questions):
-        self.questions = questions
-
-    @classmethod
-    def from_data(cls, data):
-        questions = [item for item in data]
-        return cls(questions)
-
-
 class Group(object):
     def __init__(self, people):
         self.people = people
