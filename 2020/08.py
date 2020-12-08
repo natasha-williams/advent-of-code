@@ -5,7 +5,6 @@ import common
 class Console(object):
     def __init__(self, instructions):
         self.instructions = instructions
-        self.accumulator = 0
 
     @classmethod
     def from_data(cls, data):
