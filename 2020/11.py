@@ -36,7 +36,7 @@ class Seat(object):
                 else:
                     break
 
-        return [x.seat for x in seats]
+        return [seat.seat for seat in seats]
 
 
 class SeatingPlan(object):
