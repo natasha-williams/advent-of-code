@@ -39,4 +39,4 @@ class Submarine(object):
 
 submarine = Submarine.from_data()
 print('Part 1: {}'.format(submarine.drive()))
-print('Part 1: {}'.format(submarine.drive(calculate_aim=True)))
+print('Part 2: {}'.format(submarine.drive(calculate_aim=True)))
