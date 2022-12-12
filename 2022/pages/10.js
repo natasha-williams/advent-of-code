@@ -85,9 +85,9 @@ export default function Day10() {
 
             <section>
                 <h1>Part 2</h1>
-                {part2().map(item => {
+                {part2().map((item, index) => {
                     return (
-                        <div style={{ fontFamily: 'monospace' }}>
+                        <div key={index} style={{ fontFamily: 'monospace' }}>
                             {item}
                         </div>
                     );
