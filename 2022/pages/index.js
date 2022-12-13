@@ -12,6 +12,7 @@ import Day09 from './09';
 import Day10 from './10';
 import Day11 from './11';
 import Day12 from './12';
+import Day13 from './13';
 
 
 export default function Home() {
@@ -40,6 +41,8 @@ export default function Home() {
             <Day11 />
             <hr />
             <Day12 />
+            <hr />
+            <Day13 />
         </React.Fragment>
     );
 }
